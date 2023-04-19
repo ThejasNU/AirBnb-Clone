@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+</head>
+<body>
+<div class="w-full max-w-xs absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <h1 class="text-black-600 font-semibold text-center align-center text-3xl">Owner Dashboard</h1><br/>
+    <h2 class="text-red-600 font-semibold text-center align-center text-2xl">Hello,<span th:text="${owner.firstName}"/> <span th:text="${owner.lastName}" />!</h2><br/>
+    <div class="flex space-x-4">
+    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+        <a th:href="@{/owner/addHome}">Add a home</a>
+    </button>
+    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+        <a th:href="@{/owner/tenantReview}">Review your tenant</a>
+    </button>
+    </div>
+</div>
+<div class="p-6 rounded-lg shadow-lg bg-white max-w-md w-full absolute bottom-32 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <h1 class="mb-4 text-red-600 font-semibold text-center">Your Homes</h1>
+    <div class="flex flex-col space-y-2">
+        <div class="grid grid-cols-3 gap-4 justify-items-center place-content-around font-semibold">
+            <p>Home Name</p>
+            <p>Price</p>
+            <p>City</p>
+        </div>
+        <div class="grid grid-cols-3 gap-4 justify-items-center place-content-around" th:each="home:${homes}">
+            <p th:text="${home.getHomeName()}"></p>
+            <p th:text="${home.getPrice()}"></p>
+            <p th:text="${home.getCity()}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

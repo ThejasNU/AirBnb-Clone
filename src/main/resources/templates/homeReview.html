@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Home Review</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+</head>
+<body>
+<div class="block p-6 rounded-lg shadow-lg bg-white max-w-md absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+  <h2 class="text-red-600 font-semibold text-center align-center text-3xl">Hello Tenant, Add your Review Below!</h2>
+  <br/>
+  <form th:action="@{/tenant/homeReview}" th:object="${reviewFormData}" method="post">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-group mb-6">
+        <input type="text" class="form-control
+          block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
+               aria-describedby="emailHelp123" placeholder="Home ID" th:field="${reviewFormData.homeID}">
+      </div>
+    </div>
+    <div class="form-group mb-6">
+      <input type="text" th:field="${reviewFormData.rating}" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput130"
+             placeholder="Rating"  >
+    </div>
+    <div class="form-group mb-6">
+      <input type="text" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
+             placeholder="Review" th:field="${reviewFormData.review}">
+    </div>
+    <button type="submit" class="
+      w-full
+      px-6
+      py-2.5
+      bg-red-500
+      text-white
+      font-medium
+      text-xs
+      leading-tight
+      uppercase
+      rounded
+      shadow-md
+      hover:bg-red-600 hover:shadow-lg
+      focus:bg-red-800 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-red-800 active:shadow-lg
+      transition
+      duration-150
+      ease-in-out">Publish Review</button>
+  </form>
+</div>
+<div class="p-6 rounded-lg shadow-lg bg-white max-w-lg w-full absolute bottom-24 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+  <h1 class="mb-4 text-red-600 font-semibold text-center">Available Homes</h1>
+  <div class="flex flex-col space-y-2">
+    <div class="grid grid-cols-4 gap-4 justify-items-center place-content-around font-semibold">
+      <p>Home Id</p>
+      <p>Home Name</p>
+      <p>City</p>
+      <p>Price</p>
+    </div>
+    <div class="grid grid-cols-4 gap-4 justify-items-center place-content-around" th:each="home:${homes}">
+      <p th:text="${home.getHomeID()}"></p>
+      <p th:text="${home.getHomeName()}"></p>
+      <p th:text="${home.getCity()}"></p>
+      <p th:text="${home.getPrice()}"></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
