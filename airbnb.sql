@@ -29,7 +29,7 @@ create sequence owner_seq increment 1 start 1;
 create table home(
                      homeID integer primary key not null,
                      ownerID integer not null,
-                     roomNo integer not null,
+                     homename varchar(39) not null,
                      price float not null,
                      city varchar (20) not null,
                      state varchar (20) not null,
@@ -40,16 +40,16 @@ create table home(
 create sequence home_seq increment 1 start 1;
 
 create table booking(
-                            bookingID integer not null,
-                             homeID integer not null,
-                             ownerID integer not null,
-                             tenantID integer not null,
-                             startDate Date not null,
-                             endDate Date not null,
-                             foreign key (ownerID) references owner(ownerId),
-                             foreign key (homeID) references home(homeID),
-                             foreign key (tenantID) references tenant(tenantID),
-                             primary key (bookingID)
+                    bookingID integer not null,
+                    homeID integer not null,
+                    ownerID integer not null,
+                    tenantID integer not null,
+                    startDate Date not null,
+                    endDate Date not null,
+                    foreign key (ownerID) references owner(ownerId),
+                    foreign key (homeID) references home(homeID),
+                    foreign key (tenantID) references tenant(tenantID),
+                    primary key (bookingID)
 );
 
 create table homeReview(
@@ -73,5 +73,3 @@ create table tenantReview(
                              foreign key (tenantID) references tenant(tenantID),
                              primary key (ownerID,tenantID)
 );
-alter table home drop column roomno;
-alter table home ADD homename varchar(30);
